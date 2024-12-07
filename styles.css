@@ -1,6 +1,7 @@
 /* Подключение шрифта */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Inter:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
+
 /* Общие стили */
 body {
     margin: 0;
@@ -11,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: auto; /* Изменили с hidden на auto для прокрутки */
 }
 
 .container {
@@ -23,6 +24,8 @@ body {
     width: 90%;
     max-width: 400px;
     animation: fadeIn 2s ease-out;
+    overflow: auto; /* Убедимся, что и контейнер не ограничивает прокрутку */
+    max-height: 95vh; /* Ограничение высоты контейнера, чтобы он не выходил за экран */
 }
 
 h1.title {
@@ -58,32 +61,34 @@ h1.title {
 .heart-container {
     position: relative;
     margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .heart {
-    width: 40px;
-    height: 40px;
-    background-color: #FF69B4;
-    position: absolute;
-    border-radius: 50%;
+    font-size: 40px; /* Размер смайлов */
     animation: heartAnimation 2s ease-in-out infinite;
+    margin: 10px;
 }
 
 .heart:nth-child(1) {
-    top: 0;
-    left: 50px;
+    animation-delay: 0s;
 }
 
 .heart:nth-child(2) {
-    top: 40px;
-    left: 100px;
     animation-delay: 0.5s;
 }
 
 .heart:nth-child(3) {
-    top: 80px;
-    left: 150px;
     animation-delay: 1s;
+}
+
+.star {
+    font-size: 30px;
+    color: #FFD700;
+    animation: starAnimation 3s ease-in-out infinite;
+    margin: 15px;
 }
 
 /* Анимации */
@@ -98,10 +103,10 @@ h1.title {
 
 @keyframes photoAnimation {
     0% {
-        transform: scale(0) rotate(0deg); /* Поворот остается */
+        transform: scale(0) rotate(5deg); /* Поворот остается */
     }
     100% {
-        transform: scale(1) rotate(-15deg); /* Поворот остается */
+        transform: scale(1) rotate(5deg); /* Поворот остается */
     }
 }
 
@@ -129,6 +134,21 @@ h1.title {
     }
 }
 
+@keyframes starAnimation {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
 /* Адаптивность для мобильных устройств */
 @media (max-width: 600px) {
     h1.title {
@@ -146,7 +166,10 @@ h1.title {
 
     .heart {
         margin: 10px;
-        width: 30px;
-        height: 30px;
+        font-size: 30px; /* Уменьшение размера на мобильных устройствах */
+    }
+
+    .star {
+        font-size: 25px;
     }
 }
